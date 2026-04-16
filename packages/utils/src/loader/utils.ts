@@ -2,9 +2,52 @@ import { isUnsetKeyword } from '../svg/build';
 import { calculateSize } from '../svg/size';
 import type { Awaitable, IconifyLoaderOptions } from './types';
 
-const svgWidthRegex = /\swidth\s*=\s*["']([\w.]+)["']/;
-const svgHeightRegex = /\sheight\s*=\s*["']([\w.]+)["']/;
+const svgWidthRegex = /\swidth\s*=\s*["']([^"']+)["']/;
+const svgHeightRegex = /\sheight\s*=\s*["']([^"']+)["']/;
+const svgViewBoxRegex = /\sviewBox\s*=\s*["']([^"']+)["']/;
 const svgTagRegex = /<svg\s+/;
+export const loaderDefaultWidthProp = '__iconify_loader_width';
+export const loaderDefaultHeightProp = '__iconify_loader_height';
+
+function stringifySize(value: string | number | undefined): string | undefined {
+	return value === undefined ? value : value.toString();
+}
+
+function getConfiguredSize(
+	source: string | undefined,
+	scale?: number
+): string | undefined {
+	if (typeof scale === 'number') {
+		return scale > 0 ? stringifySize(calculateSize(source ?? '1em', scale)) : undefined;
+	}
+	return source;
+}
+
+function getSvgAspectRatio(
+	svgNode: string,
+	props: Record<string, string>
+): number | undefined {
+	const viewBox = props.viewBox ?? svgViewBoxRegex.exec(svgNode)?.[1];
+	if (!viewBox) {
+		return;
+	}
+
+	const values = viewBox
+		.trim()
+		.split(/[\s,]+/)
+		.map((value) => parseFloat(value));
+	if (values.length !== 4 || values.some((value) => !Number.isFinite(value))) {
+		return;
+	}
+
+	const width = values[2];
+	const height = values[3];
+	if (width <= 0 || height <= 0) {
+		return;
+	}
+
+	return width / height;
+}
 
 function configureSvgSize(
 	svg: string,
@@ -12,33 +55,67 @@ function configureSvgSize(
 	scale?: number
 ): [boolean, boolean] {
 	const svgNode = svg.slice(0, svg.indexOf('>'));
+	const widthOnSvg = svgWidthRegex.test(svgNode);
+	const heightOnSvg = svgHeightRegex.test(svgNode);
+	const defaultWidth =
+		props[loaderDefaultWidthProp] ?? svgWidthRegex.exec(svgNode)?.[1];
+	const defaultHeight =
+		props[loaderDefaultHeightProp] ?? svgHeightRegex.exec(svgNode)?.[1];
+	const aspectRatio = getSvgAspectRatio(svgNode, props);
+	delete props[loaderDefaultWidthProp];
+	delete props[loaderDefaultHeightProp];
 
-	const check = (prop: 'width' | 'height', regex: RegExp): boolean => {
-		const result = regex.exec(svgNode);
-		const isSet = result != null;
+	const customWidth = props.width;
+	const customHeight = props.height;
+	const hasCustomWidth = !!customWidth || isUnsetKeyword(customWidth);
+	const hasCustomHeight = !!customHeight || isUnsetKeyword(customHeight);
 
-		const propValue = props[prop];
-
-		if (!propValue && !isUnsetKeyword(propValue)) {
-			if (typeof scale === 'number') {
-				// Scale icon, unless scale is 0
-				if (scale > 0) {
-					props[prop] = calculateSize(
-						// Base on result from iconToSVG() or 1em
-						result?.[1] ?? '1em',
-						scale
-					);
-				}
-			} else if (result) {
-				// Use result from iconToSVG()
-				props[prop] = result[1];
+	if (hasCustomWidth || hasCustomHeight) {
+		if (!hasCustomWidth) {
+			if (isUnsetKeyword(customHeight)) {
+				delete props.width;
+				delete props.height;
+			} else if (aspectRatio) {
+				props.width = stringifySize(
+					calculateSize(customHeight as string, aspectRatio)
+				) as string;
+				props.height = customHeight as string;
+			} else {
+				delete props.width;
+			}
+		} else if (isUnsetKeyword(customWidth)) {
+			delete props.width;
+			if (!hasCustomHeight || isUnsetKeyword(customHeight)) {
+				delete props.height;
 			}
 		}
 
-		return isSet;
-	};
+		if (!hasCustomHeight) {
+			if (isUnsetKeyword(customWidth)) {
+				delete props.height;
+			} else if (aspectRatio) {
+				props.height = stringifySize(
+					calculateSize(customWidth as string, 1 / aspectRatio)
+				) as string;
+				props.width = customWidth as string;
+			} else {
+				delete props.height;
+			}
+		} else if (isUnsetKeyword(customHeight)) {
+			delete props.height;
+		}
+	} else {
+		const width = getConfiguredSize(defaultWidth, scale);
+		const height = getConfiguredSize(defaultHeight, scale);
+		if (width) {
+			props.width = width;
+		}
+		if (height) {
+			props.height = height;
+		}
+	}
 
-	return [check('width', svgWidthRegex), check('height', svgHeightRegex)];
+	return [widthOnSvg, heightOnSvg];
 }
 
 export async function mergeIconProps(

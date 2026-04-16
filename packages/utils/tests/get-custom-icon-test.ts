@@ -154,4 +154,66 @@ describe('Testing getCustomIcon', () => {
 			'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 120"><circle cx="45" cy="60" r="30"/></svg>'
 		);
 	});
+
+	test('CustomIconLoader recalculates width from explicit height', async () => {
+		const svg =
+			'<svg viewBox="0 0 640 512"><path d="M0 0h640v512H0z"/></svg>';
+		const result = await getCustomIcon(() => svg, 'a', 'b', {
+			scale: 1.2,
+			customizations: {
+				additionalProps: {
+					height: '2em',
+				},
+			},
+		});
+		expect(result && result.includes('width="2.5em"')).toBeTruthy();
+		expect(result && result.includes('height="2em"')).toBeTruthy();
+	});
+
+	test('CustomIconLoader recalculates height from explicit width', async () => {
+		const svg =
+			'<svg viewBox="0 0 640 512"><path d="M0 0h640v512H0z"/></svg>';
+		const result = await getCustomIcon(() => svg, 'a', 'b', {
+			scale: 1.2,
+			customizations: {
+				additionalProps: {
+					width: '2em',
+				},
+			},
+		});
+		expect(result && result.includes('width="2em"')).toBeTruthy();
+		expect(result && result.includes('height="1.6em"')).toBeTruthy();
+	});
+
+	test('CustomIconLoader omits suppressed dimensions', async () => {
+		const svg =
+			'<svg viewBox="0 0 640 512"><path d="M0 0h640v512H0z"/></svg>';
+		const result = await getCustomIcon(() => svg, 'a', 'b', {
+			scale: 1.2,
+			customizations: {
+				additionalProps: {
+					width: 'unset',
+					height: 'none',
+				},
+			},
+		});
+		expect(result && result.includes('width="')).toBeFalsy();
+		expect(result && result.includes('height="')).toBeFalsy();
+	});
+
+	test('CustomIconLoader keeps explicit value while omitting suppressed side', async () => {
+		const svg =
+			'<svg viewBox="0 0 640 512"><path d="M0 0h640v512H0z"/></svg>';
+		const result = await getCustomIcon(() => svg, 'a', 'b', {
+			scale: 1.2,
+			customizations: {
+				additionalProps: {
+					width: 'unset',
+					height: '2em',
+				},
+			},
+		});
+		expect(result && result.includes('width="')).toBeFalsy();
+		expect(result && result.includes('height="2em"')).toBeTruthy();
+	});
 });

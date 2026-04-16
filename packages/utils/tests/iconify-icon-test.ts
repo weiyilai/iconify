@@ -104,7 +104,7 @@ describe('Testing loadNodeIcon', () => {
 		});
 		expect(result).toBeTruthy();
 		expect(result && result.includes('width="')).toBeFalsy();
-		expect(result && result.includes('height="1em"')).toBeTruthy();
+		expect(result && result.includes('height="')).toBeFalsy();
 	});
 
 	test('loadIcon with custom width/height', async () => {
@@ -157,7 +157,7 @@ describe('Testing loadNodeIcon', () => {
 			},
 		});
 		expect(result).toBeTruthy();
-		expect(result && result.includes('width="')).toBeFalsy();
+		expect(result && result.includes('width="1em"')).toBeTruthy();
 		expect(result && result.includes('height="1em"')).toBeTruthy();
 	});
 
@@ -189,5 +189,72 @@ describe('Testing loadNodeIcon', () => {
 		expect(result).toBeTruthy();
 		expect(result && result.includes('width="0.75em"')).toBeTruthy();
 		expect(result && result.includes('height="1em"')).toBeTruthy();
+	});
+
+	test('loadIcon preserves default sizing for non-square icon', async () => {
+		const result = await loadNodeIcon('fa6-regular', 'comments', {
+			scale: 1.2,
+		});
+		expect(result).toBeTruthy();
+		expect(result && result.includes('width="1.5em"')).toBeTruthy();
+		expect(result && result.includes('height="1.2em"')).toBeTruthy();
+	});
+
+	test('loadIcon recalculates width from explicit height', async () => {
+		const result = await loadNodeIcon('fa6-regular', 'comments', {
+			scale: 1.2,
+			customizations: {
+				additionalProps: {
+					height: '2em',
+				},
+			},
+		});
+		expect(result).toBeTruthy();
+		expect(result && result.includes('height="2em"')).toBeTruthy();
+		expect(result && result.includes('width="2.5em"')).toBeTruthy();
+	});
+
+	test('loadIcon recalculates height from explicit width', async () => {
+		const result = await loadNodeIcon('fa6-regular', 'comments', {
+			scale: 1.2,
+			customizations: {
+				additionalProps: {
+					width: '2em',
+				},
+			},
+		});
+		expect(result).toBeTruthy();
+		expect(result && result.includes('width="2em"')).toBeTruthy();
+		expect(result && result.includes('height="1.6em"')).toBeTruthy();
+	});
+
+	test('loadIcon omits suppressed dimensions', async () => {
+		const result = await loadNodeIcon('fa6-regular', 'comments', {
+			scale: 1.2,
+			customizations: {
+				additionalProps: {
+					width: 'unset',
+					height: 'unset',
+				},
+			},
+		});
+		expect(result).toBeTruthy();
+		expect(result && result.includes('width="')).toBeFalsy();
+		expect(result && result.includes('height="')).toBeFalsy();
+	});
+
+	test('loadIcon keeps explicit value while omitting suppressed side', async () => {
+		const result = await loadNodeIcon('fa6-regular', 'comments', {
+			scale: 1.2,
+			customizations: {
+				additionalProps: {
+					width: 'unset',
+					height: '2em',
+				},
+			},
+		});
+		expect(result).toBeTruthy();
+		expect(result && result.includes('width="')).toBeFalsy();
+		expect(result && result.includes('height="2em"')).toBeTruthy();
 	});
 });

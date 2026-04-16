@@ -1,8 +1,11 @@
 import type { IconifyJSON, IconifyIcon } from '@iconify/types';
-import { iconToSVG, isUnsetKeyword } from '../svg/build';
+import { iconToSVG } from '../svg/build';
 import { getIconData } from '../icon-set/get-icon';
-import { calculateSize } from '../svg/size';
-import { mergeIconProps } from './utils';
+import {
+	loaderDefaultHeightProp,
+	loaderDefaultWidthProp,
+	mergeIconProps,
+} from './utils';
 import { defaultIconCustomisations } from '../customisations/defaults';
 import type { IconifyLoaderOptions } from './types';
 
@@ -35,7 +38,6 @@ export async function searchForIcon(
 				attributes: { width, height, ...restAttributes },
 				body,
 			} = iconToSVG(iconData, defaultCustomizations);
-			const scale = options?.scale;
 			return await mergeIconProps(
 				// DON'T remove space on <svg >
 				`<svg >${body}</svg>`,
@@ -43,47 +45,11 @@ export async function searchForIcon(
 				id,
 				options,
 				() => {
-					return { ...restAttributes };
-				},
-				(props) => {
-					// Check if value has 'unset' keyword
-					const check = (
-						prop: 'width' | 'height',
-						defaultValue: string | undefined
-					) => {
-						const propValue = props[prop];
-						let value: string | undefined;
-
-						if (!isUnsetKeyword(propValue)) {
-							if (propValue) {
-								// Do not change it
-								return;
-							}
-
-							if (typeof scale === 'number') {
-								// Scale icon, unless scale is 0
-								if (scale) {
-									value = calculateSize(
-										// Base on result from iconToSVG() or 1em
-										defaultValue ?? '1em',
-										scale
-									);
-								}
-							} else {
-								// Use result from iconToSVG()
-								value = defaultValue;
-							}
-						}
-
-						// Change / unset
-						if (!value) {
-							delete props[prop];
-						} else {
-							props[prop] = value;
-						}
+					return {
+						...restAttributes,
+						...(width ? { [loaderDefaultWidthProp]: width } : {}),
+						...(height ? { [loaderDefaultHeightProp]: height } : {}),
 					};
-					check('width', width);
-					check('height', height);
 				}
 			);
 		}
