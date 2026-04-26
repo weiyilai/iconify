@@ -1,7 +1,7 @@
 {
 	"extends": "../tsconfig.common.json",
 	"compilerOptions": {
-		"types": ["jest"],
+		"types": ["vitest/globals"],
 		"rootDir": "."
 	}
 }
