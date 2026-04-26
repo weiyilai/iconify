@@ -14,9 +14,11 @@ import BlueSkyIconTest from '@iconify/ri-solid-test/bluesky-line';
 import TestIcon1 from './icons/icon1.jsx';
 import TestIcon2 from './icons/icon2.jsx';
 import TestIcon3 from './icons/icon3.jsx';
+import TestIcon4 from './icons/icon4.jsx';
 import TestIcon1b from './icons/icon1-ts.jsx';
 import TestIcon2b from './icons/icon2-ts.jsx';
 import TestIcon3b from './icons/icon3-ts.jsx';
+import TestIcon4b from './icons/icon4-ts.jsx';
 
 const grid24: CSSIconComponentViewbox = {
 	width: 24,
@@ -180,7 +182,8 @@ function StatefulDemo() {
 	return (
 		<Show when={isRendering()}>
 			<div class="icons-list svg-hover-anchor">
-				Generated stateful icons (one with ts, one without):
+				Generated stateful icons (one with ts, one without, last icon is
+				duplicated with static mode and no fallback):
 				<div>
 					<TestIcon1
 						height="24"
@@ -196,6 +199,18 @@ function StatefulDemo() {
 					<TestIcon2b height="24" action={action()} />
 					<TestIcon3 height="24" mode={mode()} fill={fill()} />
 					<TestIcon3b height="24" mode={mode()} fill={fill()} />
+					<TestIcon4
+						height="24"
+						mode={mode()}
+						fill={fill()}
+						static={true}
+					/>
+					<TestIcon4b
+						height="24"
+						mode={mode()}
+						fill={fill()}
+						static={true}
+					/>
 				</div>
 			</div>
 			<div style="display: flex; gap: 8px; flex-wrap: wrap;">
@@ -311,7 +326,7 @@ const App: Component = () => {
 							<Icon
 								viewBox={grid24}
 								height="24"
-								fallback={iconData()}
+								fallback={iconData()!}
 							/>
 						</div>
 					</div>

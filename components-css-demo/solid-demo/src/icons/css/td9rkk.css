@@ -22,9 +22,14 @@ svg.state-light {
 
 @media not (prefers-reduced-motion) {
   .td9rkk {
-    stroke-dasharray: 6;
-    stroke-dashoffset: 6;
-    animation: 0.4s linear 0.8s forwards so-to-0;
     transition: d 0.4s linear;
+  }
+
+  svg:not(.state-static) {
+    .td9rkk {
+      stroke-dasharray: 6;
+      stroke-dashoffset: 6;
+      animation: 0.4s linear 0.8s forwards so-to-0;
+    }
   }
 }

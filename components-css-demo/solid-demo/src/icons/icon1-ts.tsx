@@ -15,14 +15,15 @@ interface Props {
 	halign?: 'left' | 'center' | 'right';
 	valign?: 'top' | 'middle' | 'bottom' | 'stretch';
 	focus?: boolean;
+	static?: boolean;
 	width?: string;
 	height?: string;
 };
 
 function Component(props: Props) {
-	const [local, others] = splitProps(props, ["halign","valign","focus","width","height"]);
+	const [local, others] = splitProps(props, ["halign","valign","focus","static","width","height"]);
 
-	const states = createMemo(() => ({ 'halign': namedStateValue(local['halign'], 'left'), 'valign': namedStateValue(local['valign'], 'top'), 'focus': local['focus'] }));
+	const states = createMemo(() => ({ 'halign': namedStateValue(local['halign'], 'left'), 'valign': namedStateValue(local['valign'], 'top'), 'focus': local['focus'], 'static': local['static'] }));
 	const fallback = createMemo(() => getFallback(["animated-line-24:align-box-",{"state":"halign"},"-",{"state":"valign"}],states()));
 	const className = createMemo(() => Object.entries(states()).map(([key, value]) => value ? `state-${value === true ? key : value}` : '').join(' ').trim() || undefined);
 	return (<Icon class={className()} width={local.width} height={local.height} viewBox={viewBox} content={content} fallback={fallback()} {...others} />);

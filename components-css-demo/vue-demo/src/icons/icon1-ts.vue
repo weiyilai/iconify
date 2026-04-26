@@ -13,11 +13,12 @@ const props = defineProps<{
 	halign?: 'left' | 'center' | 'right';
 	valign?: 'top' | 'middle' | 'bottom' | 'stretch';
 	focus?: boolean;
+	static?: boolean;
 	width?: string;
 	height?: string;
 }>();
 
-const states = computed(() => ({ 'halign': namedStateValue(props['halign'], 'left'), 'valign': namedStateValue(props['valign'], 'top'), 'focus': props['focus'] }));
+const states = computed(() => ({ 'halign': namedStateValue(props['halign'], 'left'), 'valign': namedStateValue(props['valign'], 'top'), 'focus': props['focus'], 'static': props['static'] }));
 const fallback = computed(() => getFallback(["animated-line-24:align-box-",{"state":"halign"},"-",{"state":"valign"}],states.value));
 const className = computed(() => Object.entries(states.value).map(([key, value]) => value ? `state-${value === true ? key : value}` : '').join(' ').trim() || undefined);
 const viewBox = {"width":22,"height":24};

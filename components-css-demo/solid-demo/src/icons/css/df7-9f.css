@@ -22,8 +22,13 @@ svg.state-light {
 
 @media not (prefers-reduced-motion) {
   .df7-9f {
-    stroke-dasharray: 34;
-    animation: 0.4s linear forwards so-from-34;
     transition: d 0.4s linear;
+  }
+
+  svg:not(.state-static) {
+    .df7-9f {
+      stroke-dasharray: 34;
+      animation: 0.4s linear forwards so-from-34;
+    }
   }
 }

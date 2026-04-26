@@ -15,9 +15,11 @@ import BlueSkyIconTest from '@iconify/ri-svelte-test/bluesky-line';
 import TestIcon1 from './icons/icon1.svelte';
 import TestIcon2 from './icons/icon2.svelte';
 import TestIcon3 from './icons/icon3.svelte';
+import TestIcon4 from './icons/icon4.svelte';
 import TestIcon1b from './icons/icon1-ts.svelte';
 import TestIcon2b from './icons/icon2-ts.svelte';
 import TestIcon3b from './icons/icon3-ts.svelte';
+import TestIcon4b from './icons/icon4-ts.svelte';
 
 const grid24: CSSIconComponentViewbox = {
 	width: 24,
@@ -244,7 +246,8 @@ function nextMode() {
 			</div>
 		</div>
 		<div class="icons-list svg-hover-anchor">
-			Generated stateful icons (one with ts, one without):
+			Generated stateful icons (one with ts, one without, last icon is
+				duplicated with static mode and no fallback):
 			<div>
 				<TestIcon1 height="24" halign={halign} valign={valign} />
 				<TestIcon1b height="24" halign={halign} valign={valign} />
@@ -252,6 +255,8 @@ function nextMode() {
 				<TestIcon2b height="24" action={action} />
 				<TestIcon3 height="24" mode={mode} fill={fill} />
 				<TestIcon3b height="24" mode={mode} fill={fill} />
+				<TestIcon4 height="24" mode={mode} fill={fill} static={true} />
+				<TestIcon4b height="24" mode={mode} fill={fill} static={true} />
 			</div>
 		</div>
 		<div style="display: flex; gap: 8px; flex-wrap: wrap;">

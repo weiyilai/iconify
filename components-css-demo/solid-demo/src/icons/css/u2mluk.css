@@ -11,8 +11,13 @@ button:focus-visible:not(:disabled), button:hover:not(:disabled), input:focus-vi
 
 @media not (prefers-reduced-motion) {
   .u2mluk {
-    stroke-dasharray: 74;
-    animation: 0.6s linear forwards so-from-74;
     transition: d 0.4s linear;
+  }
+
+  svg:not(.state-static) {
+    .u2mluk {
+      stroke-dasharray: 74;
+      animation: 0.6s linear forwards so-from-74;
+    }
   }
 }

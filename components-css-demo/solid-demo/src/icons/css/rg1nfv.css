@@ -22,8 +22,13 @@ svg.state-dark {
 
 @media not (prefers-reduced-motion) {
   .rg1nfv {
-    stroke-dasharray: 44;
-    animation: 0.4s linear forwards so-from-44;
     transition: d 0.4s linear;
+  }
+
+  svg:not(.state-static) {
+    .rg1nfv {
+      stroke-dasharray: 44;
+      animation: 0.4s linear forwards so-from-44;
+    }
   }
 }

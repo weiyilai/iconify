@@ -1,4 +1,3 @@
-
 export function getIconFallback(
     defaultValues,
     template,

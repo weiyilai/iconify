@@ -22,8 +22,13 @@ svg.state-dark {
 
 @media not (prefers-reduced-motion) {
   .sh2p6x {
-    stroke-dasharray: 28;
-    animation: 0.4s linear forwards so-from-28;
     transition: d 0.4s linear;
+  }
+
+  svg:not(.state-static) {
+    .sh2p6x {
+      stroke-dasharray: 28;
+      animation: 0.4s linear forwards so-from-28;
+    }
   }
 }

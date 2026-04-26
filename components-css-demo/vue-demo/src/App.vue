@@ -15,12 +15,15 @@ import BlueSkyIconTest from '@iconify/ri-vue-test/bluesky-line';
 import TestIcon1 from './icons/icon1.vue';
 import TestIcon2 from './icons/icon2.vue';
 import TestIcon3 from './icons/icon3.vue';
+import TestIcon4 from './icons/icon4.vue';
 import TestIcon1b from './icons/icon1-ts.vue';
 import TestIcon2b from './icons/icon2-ts.vue';
 import TestIcon3b from './icons/icon3-ts.vue';
+import TestIcon4b from './icons/icon4-ts.vue';
 import TestIcon1c from './icons/icon1-func.js';
 import TestIcon2c from './icons/icon2-func.js';
 import TestIcon3c from './icons/icon3-func.js';
+import TestIcon4c from './icons/icon4-func.js';
 
 const grid24: CSSIconComponentViewbox = {
 	width: 24,
@@ -242,7 +245,8 @@ function nextMode() {
 			</div>
 			<div class="icons-list svg-hover-anchor">
 				Generated stateful icons (one with ts, one without, one
-				functional):
+				functional, last icons are duplicated with static mode and no
+				fallback):
 				<div>
 					<TestIcon1 height="24" :halign="halign" :valign="valign" />
 					<TestIcon1b
@@ -260,6 +264,24 @@ function nextMode() {
 					<TestIcon3 height="24" :fill="fill" :mode="mode" />
 					<TestIcon3b height="24" :fill="fill" :mode="mode" />
 					<TestIcon3c height="24" :fill="fill" :mode="mode" />
+					<TestIcon4
+						height="24"
+						:fill="fill"
+						:mode="mode"
+						:static="true"
+					/>
+					<TestIcon4b
+						height="24"
+						:fill="fill"
+						:mode="mode"
+						:static="true"
+					/>
+					<TestIcon4c
+						height="24"
+						:fill="fill"
+						:mode="mode"
+						:static="true"
+					/>
 				</div>
 			</div>
 			<div style="display: flex; gap: 8px; flex-wrap: wrap">

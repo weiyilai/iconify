@@ -3,15 +3,15 @@ import Icon from '@iconify/css-svelte';
 import { getFallback } from './helpers/fallback-fi4iupre1o.js';
 
 /** @type {{action?: boolean; focus?: boolean; width?: string; height?: string;}} */
-let {action, focus, width, height, ...props} = $props();
+let {action: actionProp, focus: focusProp, width: widthProp, height: heightProp, ...props} = $props();
 
-let states = $derived(({ 'action': action, 'focus': focus }));
+let states = $derived(({ 'action': actionProp, 'focus': focusProp }));
 let fallback = $derived(getFallback(["animated-line-24:",{"state":"action","values":["remove","search"]}],states));
 let className = $derived(Object.entries(states).map(([key, value]) => value ? `state-${value === true ? key : value}` : '').join(' ').trim() || undefined);
 const viewBox = {"width":20,"height":24};
 const content = `<defs><mask id="SVGRErrZbBT"><path class="ae-3qn g_1xrq p10gmg"/><path class="g_1xrq objeeb zs6nhs"/></mask></defs><path mask="url(#SVGRErrZbBT)" class="mbb8cl"/><path class="a8wtkc g_1xrq p10gmg zs6nhs"/>`;
 </script>
-<Icon class={className} width={width} height={height} viewBox={viewBox} content={content} fallback={fallback} {...props}></Icon>
+<Icon class={className} width={widthProp} height={heightProp} viewBox={viewBox} content={content} fallback={fallback} {...props}></Icon>
 <style>
 :global(.a8wtkc) {
   stroke: var(--svg-primary-color, currentColor);

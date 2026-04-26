@@ -143,9 +143,14 @@ svg.state-stretch {
 
 @media not (prefers-reduced-motion) {
   .b6dtxa {
-    stroke-dasharray: 10;
-    stroke-dashoffset: 10;
-    animation: 0.2s linear 0.7s forwards so-to-0;
     transition: d 0.4s linear;
+  }
+
+  svg:not(.state-static) {
+    .b6dtxa {
+      stroke-dasharray: 10;
+      stroke-dashoffset: 10;
+      animation: 0.2s linear 0.7s forwards so-to-0;
+    }
   }
 }

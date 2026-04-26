@@ -5,6 +5,7 @@ interface IconProps {
 	halign?: 'left' | 'center' | 'right';
 	valign?: 'top' | 'middle' | 'bottom' | 'stretch';
 	focus?: boolean;
+	static?: boolean;
 	width?: string;
 	height?: string;
 }

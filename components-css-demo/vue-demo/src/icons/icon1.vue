@@ -9,9 +9,9 @@ import './css/b6dtxa.css';
 import './css/so-from-74.css';
 import './css/so-to-0.css';
 
-const props = defineProps(["halign","valign","focus","width","height"]);
+const props = defineProps(["halign","valign","focus","static","width","height"]);
 
-const states = computed(() => ({ 'halign': namedStateValue(props['halign'], 'left'), 'valign': namedStateValue(props['valign'], 'top'), 'focus': props['focus'] }));
+const states = computed(() => ({ 'halign': namedStateValue(props['halign'], 'left'), 'valign': namedStateValue(props['valign'], 'top'), 'focus': props['focus'], 'static': props['static'] }));
 const fallback = computed(() => getFallback(["animated-line-24:align-box-",{"state":"halign"},"-",{"state":"valign"}],states.value));
 const className = computed(() => Object.entries(states.value).map(([key, value]) => value ? `state-${value === true ? key : value}` : '').join(' ').trim() || undefined);
 const viewBox = {"width":22,"height":24};

@@ -14,19 +14,20 @@ interface Props {
 	halign?: 'left' | 'center' | 'right';
 	valign?: 'top' | 'middle' | 'bottom' | 'stretch';
 	focus?: boolean;
+	static?: boolean;
 	width?: string;
 	height?: string;
 };
 
-function Component({halign, valign, focus, width, height, ...props}: Props) {
-	const states = useMemo(() => ({ 'halign': namedStateValue(halign, 'left'), 'valign': namedStateValue(valign, 'top'), 'focus': focus }), [halign, valign, focus]);
+function Component({halign: halignProp, valign: valignProp, focus: focusProp, static: staticProp, width: widthProp, height: heightProp, ...props}: Props) {
+	const states = useMemo(() => ({ 'halign': namedStateValue(halignProp, 'left'), 'valign': namedStateValue(valignProp, 'top'), 'focus': focusProp, 'static': staticProp }), [halignProp, valignProp, focusProp, staticProp]);
 	const fallback = useMemo(() => getFallback(["animated-line-24:align-box-",{"state":"halign"},"-",{"state":"valign"}], states), [states]);
 	const className = useMemo(() => Object.entries(states).map(([key, value]) => value ? `state-${value === true ? key : value}` : '').join(' ').trim() || undefined, [states]);
 	return createElement(Icon, {
 		...props,
 		className,
-		width,
-		height,
+		width: widthProp,
+		height: heightProp,
 		viewBox,
 		"content": `<path class="ona74n u2mluk"/><path class="b6dtxa ona74n"/>`,
 		fallback,

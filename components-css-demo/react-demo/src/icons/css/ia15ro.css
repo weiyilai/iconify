@@ -16,8 +16,13 @@ svg.state-light {
 
 @media not (prefers-reduced-motion) {
   .ia15ro {
-    stroke-dasharray: 18;
-    animation: 0.4s linear forwards so-from-18;
     transition: d 0.4s linear;
+  }
+
+  svg:not(.state-static) {
+    .ia15ro {
+      stroke-dasharray: 18;
+      animation: 0.4s linear forwards so-from-18;
+    }
   }
 }

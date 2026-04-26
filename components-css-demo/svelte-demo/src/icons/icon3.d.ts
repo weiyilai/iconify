@@ -5,6 +5,7 @@ interface IconProps {
 	mode?: 'auto' | 'light' | 'dark';
 	fill?: 'no-fill' | 'light-filled' | 'dark-filled' | 'filled';
 	focus?: boolean;
+	static?: boolean;
 	width?: string;
 	height?: string;
 }
