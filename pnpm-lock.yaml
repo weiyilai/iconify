@@ -43,6 +43,9 @@ importers:
 
   components-css-demo/react-demo:
     dependencies:
+      '@iconify/glyphs-poly-react-test':
+        specifier: file:iconify-glyphs-poly-react-test-1.0.0.tgz
+        version: file:components-css-demo/react-demo/iconify-glyphs-poly-react-test-1.0.0.tgz(react@19.2.5)
       '@iconify/ri-react-test':
         specifier: file:iconify-ri-react-test-1.0.0.tgz
         version: file:components-css-demo/react-demo/iconify-ri-react-test-1.0.0.tgz(react@19.2.5)
@@ -74,6 +77,9 @@ importers:
 
   components-css-demo/solid-demo:
     dependencies:
+      '@iconify/glyphs-poly-solid-test':
+        specifier: file:iconify-glyphs-poly-solid-test-1.0.0.tgz
+        version: file:components-css-demo/solid-demo/iconify-glyphs-poly-solid-test-1.0.0.tgz(solid-js@1.9.12)
       '@iconify/ri-solid-test':
         specifier: file:iconify-ri-solid-test-1.0.0.tgz
         version: file:components-css-demo/solid-demo/iconify-ri-solid-test-1.0.0.tgz(solid-js@1.9.12)
@@ -102,9 +108,12 @@ importers:
       '@iconify/css-svelte':
         specifier: workspace:*
         version: link:../../components-css/svelte
+      '@iconify/glyphs-poly-svelte-test':
+        specifier: file:iconify-glyphs-poly-svelte-test-1.0.0.tgz
+        version: file:components-css-demo/svelte-demo/iconify-glyphs-poly-svelte-test-1.0.0.tgz(svelte@5.55.5)
       '@iconify/ri-svelte-test':
         specifier: file:iconify-ri-svelte-test-1.0.0.tgz
-        version: file:components-css-demo/svelte-demo/iconify-ri-svelte-test-1.0.0.tgz
+        version: file:components-css-demo/svelte-demo/iconify-ri-svelte-test-1.0.0.tgz(svelte@5.55.5)
       '@iconify/types':
         specifier: workspace:*
         version: link:../../packages/types
@@ -139,9 +148,12 @@ importers:
       '@iconify/css-vue':
         specifier: workspace:*
         version: link:../../components-css/vue
+      '@iconify/glyphs-poly-vue-test':
+        specifier: file:iconify-glyphs-poly-vue-test-1.0.0.tgz
+        version: file:components-css-demo/vue-demo/iconify-glyphs-poly-vue-test-1.0.0.tgz(vue@3.5.33(typescript@5.9.3))
       '@iconify/ri-vue-test':
         specifier: file:iconify-ri-vue-test-1.0.0.tgz
-        version: file:components-css-demo/vue-demo/iconify-ri-vue-test-1.0.0.tgz
+        version: file:components-css-demo/vue-demo/iconify-ri-vue-test-1.0.0.tgz(vue@3.5.33(typescript@5.9.3))
       '@iconify/types':
         specifier: workspace:*
         version: link:../../packages/types
@@ -1808,30 +1820,46 @@ packages:
     peerDependencies:
       solid-js: '>=1.9.0'
 
-  '@iconify/css-svelte@1.0.0':
-    resolution: {integrity: sha512-S9kZ+U/hQ+QVHZVLKu06xiVi0rII4DJCh2Z6M1m7IOyECBD7A1emk5pRx4fWG9Zp7ZOHL8dWO90sxtsaOPZBJw==}
+  '@iconify/css-svelte@1.0.1':
+    resolution: {integrity: sha512-f9w1anXXBm48VjDEWDrGTybdiwnDTIChcUpBK/UtXR/AhNp/Co/VPp00t7dO93j+4Je0OwMKyc/HvI7Lpv3PKg==}
     peerDependencies:
       svelte: '>4.0.0'
 
-  '@iconify/css-vue@1.0.1':
-    resolution: {integrity: sha512-rGkUIToUFUfP1zIYrY8A1pWUcadGxbMgAsUyI4PmK6BgxTO5Sajw1cbl6gqMi/D26S6LSjEG/Q+7O7gcLJthaA==}
+  '@iconify/css-vue@1.0.2':
+    resolution: {integrity: sha512-KXG9zXTMmJLi1AF2ket+YWUGdSqFvIMSnCO789uOVpba6SZhqeUttu0JIaEcq2dNlt4oonwdtMyerkpRkAFYhw==}
     peerDependencies:
-      vue: '>=3'
+      vue: '>=3.0.0'
+
+  '@iconify/glyphs-poly-react-test@file:components-css-demo/react-demo/iconify-glyphs-poly-react-test-1.0.0.tgz':
+    resolution: {integrity: sha512-s4FRleHeoY+wsjCW5fJLk5TMwHZNuIMoBzuGwaVGcdp3xLT3+1Y6JZlw49lpaaGgSTIem4agjE7J+qRv376UBQ==, tarball: file:components-css-demo/react-demo/iconify-glyphs-poly-react-test-1.0.0.tgz}
+    version: 1.0.0
+
+  '@iconify/glyphs-poly-solid-test@file:components-css-demo/solid-demo/iconify-glyphs-poly-solid-test-1.0.0.tgz':
+    resolution: {integrity: sha512-tjdWtMf4AOf7dykHuxzBHqPEr4afsqa6izhpWQTaBaX3XutdV2EI7N5Qj4qiZqzkul2xkjw+cUGKKrUR4x9q/g==, tarball: file:components-css-demo/solid-demo/iconify-glyphs-poly-solid-test-1.0.0.tgz}
+    version: 1.0.0
+
+  '@iconify/glyphs-poly-svelte-test@file:components-css-demo/svelte-demo/iconify-glyphs-poly-svelte-test-1.0.0.tgz':
+    resolution: {integrity: sha512-gi6fzQvRayn3KMS5AIl512iHysCyR8LGvYgOL+LH9zpvVYSCaqojOOpBIBZO5vkDBea/F0Q/uhMyjnFQr6NI8Q==, tarball: file:components-css-demo/svelte-demo/iconify-glyphs-poly-svelte-test-1.0.0.tgz}
+    version: 1.0.0
+
+  '@iconify/glyphs-poly-vue-test@file:components-css-demo/vue-demo/iconify-glyphs-poly-vue-test-1.0.0.tgz':
+    resolution: {integrity: sha512-Z0FVBV9a+U4g2gwMh44lNPEi3LiS6Zk1vJH+jHxPlCATEMwQkoRRZ24Rj4I0jpSBwQms+CtO6AVF3jn7S1U+DQ==, tarball: file:components-css-demo/vue-demo/iconify-glyphs-poly-vue-test-1.0.0.tgz}
+    version: 1.0.0
 
   '@iconify/ri-react-test@file:components-css-demo/react-demo/iconify-ri-react-test-1.0.0.tgz':
-    resolution: {integrity: sha512-MUBwub8I+c5HEz3UGlB/ERdWSd1shSff3GFRGCcSMeyUsvWlrhCrhMR77u5ei1aSeIj4dUHFvZ7qkOxk5BWGnA==, tarball: file:components-css-demo/react-demo/iconify-ri-react-test-1.0.0.tgz}
+    resolution: {integrity: sha512-KNDHFgEC7zT/bPSWin7CLNwrnpOXxZFMR4dPgaw6zlKrFEyw3Q1BNOSbGcHb3MBDs4W38EqhMZlYZg/sn2ymkg==, tarball: file:components-css-demo/react-demo/iconify-ri-react-test-1.0.0.tgz}
     version: 1.0.0
 
   '@iconify/ri-solid-test@file:components-css-demo/solid-demo/iconify-ri-solid-test-1.0.0.tgz':
-    resolution: {integrity: sha512-qOxBAC5W4fg44hjJZfedXPGKuLJuqpbD6tnT6M3UtJvLewX9iB2EC4pUjz5K5LXnEyzddccIgapP0ck+2r2Ymw==, tarball: file:components-css-demo/solid-demo/iconify-ri-solid-test-1.0.0.tgz}
+    resolution: {integrity: sha512-7apjvTcNz5ApJFfuU2vfm+jaCopCnGdpIpPHqNjyKTLHi+zNm8TvwealraoOJ3KZr3o4DZ8zbKInSJgaqFowTQ==, tarball: file:components-css-demo/solid-demo/iconify-ri-solid-test-1.0.0.tgz}
     version: 1.0.0
 
   '@iconify/ri-svelte-test@file:components-css-demo/svelte-demo/iconify-ri-svelte-test-1.0.0.tgz':
-    resolution: {integrity: sha512-zln1B73P91Gpq6TCxYDe4WltJ3RIXCRqEcBOzb9KT1Rd//QWohCcTVu2gNVJ5UZy3zNEcu4TAvxtaQ/g1kfezg==, tarball: file:components-css-demo/svelte-demo/iconify-ri-svelte-test-1.0.0.tgz}
+    resolution: {integrity: sha512-b3IfszzDT9U8i5yxLYPWaaZRYIb3+U2cfu1ixTmSNxX0G3kks2+x1yH27vECeUlFmm0Usx3Wd83A6C9JMXKs2w==, tarball: file:components-css-demo/svelte-demo/iconify-ri-svelte-test-1.0.0.tgz}
     version: 1.0.0
 
   '@iconify/ri-vue-test@file:components-css-demo/vue-demo/iconify-ri-vue-test-1.0.0.tgz':
-    resolution: {integrity: sha512-a28n/XtcP5qK3426I0m+HqC+Sr5UMZ5y+UV21w5hXztIT8tXGNVObgjb7bOe/iSqYQaUExBUoOhFVt6dh8oQ0w==, tarball: file:components-css-demo/vue-demo/iconify-ri-vue-test-1.0.0.tgz}
+    resolution: {integrity: sha512-xR4QPZfRicglNHQHv7RSvBQ+1IiXl9OTgcfYur/1C+oD7zt9STi7mzlJm0seUH82I0qLL1mI28BP51TEBI18kQ==, tarball: file:components-css-demo/vue-demo/iconify-ri-vue-test-1.0.0.tgz}
     version: 1.0.0
 
   '@iconify/types@2.0.0':
@@ -8299,13 +8327,13 @@ snapshots:
 
   '@iconify-svelte/ri@1.0.5(svelte@5.55.5)':
     dependencies:
-      '@iconify/css-svelte': 1.0.0(svelte@5.55.5)
+      '@iconify/css-svelte': 1.0.1(svelte@5.55.5)
     transitivePeerDependencies:
       - svelte
 
   '@iconify-vue/ri@1.0.6(vue@3.5.33(typescript@5.9.3))':
     dependencies:
-      '@iconify/css-vue': 1.0.1(vue@3.5.33(typescript@5.9.3))
+      '@iconify/css-vue': 1.0.2(vue@3.5.33(typescript@5.9.3))
     transitivePeerDependencies:
       - vue
 
@@ -8319,15 +8347,39 @@ snapshots:
       '@iconify/types': 2.0.0
       solid-js: 1.9.12
 
-  '@iconify/css-svelte@1.0.0(svelte@5.55.5)':
+  '@iconify/css-svelte@1.0.1(svelte@5.55.5)':
     dependencies:
       '@iconify/types': 2.0.0
       svelte: 5.55.5
 
-  '@iconify/css-vue@1.0.1(vue@3.5.33(typescript@5.9.3))':
+  '@iconify/css-vue@1.0.2(vue@3.5.33(typescript@5.9.3))':
     dependencies:
       '@iconify/types': 2.0.0
       vue: 3.5.33(typescript@5.9.3)
+
+  '@iconify/glyphs-poly-react-test@file:components-css-demo/react-demo/iconify-glyphs-poly-react-test-1.0.0.tgz(react@19.2.5)':
+    dependencies:
+      '@iconify/css-react': 1.0.2(react@19.2.5)
+    transitivePeerDependencies:
+      - react
+
+  '@iconify/glyphs-poly-solid-test@file:components-css-demo/solid-demo/iconify-glyphs-poly-solid-test-1.0.0.tgz(solid-js@1.9.12)':
+    dependencies:
+      '@iconify/css-solid': 1.1.0(solid-js@1.9.12)
+    transitivePeerDependencies:
+      - solid-js
+
+  '@iconify/glyphs-poly-svelte-test@file:components-css-demo/svelte-demo/iconify-glyphs-poly-svelte-test-1.0.0.tgz(svelte@5.55.5)':
+    dependencies:
+      '@iconify/css-svelte': 1.0.1(svelte@5.55.5)
+    transitivePeerDependencies:
+      - svelte
+
+  '@iconify/glyphs-poly-vue-test@file:components-css-demo/vue-demo/iconify-glyphs-poly-vue-test-1.0.0.tgz(vue@3.5.33(typescript@5.9.3))':
+    dependencies:
+      '@iconify/css-vue': 1.0.2(vue@3.5.33(typescript@5.9.3))
+    transitivePeerDependencies:
+      - vue
 
   '@iconify/ri-react-test@file:components-css-demo/react-demo/iconify-ri-react-test-1.0.0.tgz(react@19.2.5)':
     dependencies:
@@ -8341,9 +8393,17 @@ snapshots:
     transitivePeerDependencies:
       - solid-js
 
-  '@iconify/ri-svelte-test@file:components-css-demo/svelte-demo/iconify-ri-svelte-test-1.0.0.tgz': {}
+  '@iconify/ri-svelte-test@file:components-css-demo/svelte-demo/iconify-ri-svelte-test-1.0.0.tgz(svelte@5.55.5)':
+    dependencies:
+      '@iconify/css-svelte': 1.0.1(svelte@5.55.5)
+    transitivePeerDependencies:
+      - svelte
 
-  '@iconify/ri-vue-test@file:components-css-demo/vue-demo/iconify-ri-vue-test-1.0.0.tgz': {}
+  '@iconify/ri-vue-test@file:components-css-demo/vue-demo/iconify-ri-vue-test-1.0.0.tgz(vue@3.5.33(typescript@5.9.3))':
+    dependencies:
+      '@iconify/css-vue': 1.0.2(vue@3.5.33(typescript@5.9.3))
+    transitivePeerDependencies:
+      - vue
 
   '@iconify/types@2.0.0': {}
 

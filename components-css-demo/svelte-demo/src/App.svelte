@@ -12,6 +12,10 @@ import GitHubIconTest from '@iconify/ri-svelte-test/github-line';
 import TwitterIconTest from '@iconify/ri-svelte-test/twitter-x-line';
 import LinkedInIconTest from '@iconify/ri-svelte-test/linkedin-box-line';
 import BlueSkyIconTest from '@iconify/ri-svelte-test/bluesky-line';
+import AppleIconTest from '@iconify/glyphs-poly-svelte-test/apple';
+import BellIconTest from '@iconify/glyphs-poly-svelte-test/bell';
+import GrinHeartsIconTest from '@iconify/glyphs-poly-svelte-test/grin-hearts';
+import UserCircleIconTest from '@iconify/glyphs-poly-svelte-test/user-circle';
 import TestIcon1 from './icons/icon1.svelte';
 import TestIcon2 from './icons/icon2.svelte';
 import TestIcon3 from './icons/icon3.svelte';
@@ -243,6 +247,24 @@ function nextMode() {
 				<TwitterIconTest height="24" />
 				<LinkedInIconTest height="24" />
 				<BlueSkyIconTest height="24" />
+			</div>
+		</div>
+		<div class="icons-list">
+			From glyphs test package:
+			<div>
+				<AppleIconTest height="24" />
+				<BellIconTest height="24" />
+				<GrinHeartsIconTest height="24" />
+				<UserCircleIconTest height="24" />
+			</div>
+		</div>
+		<div class="icons-list icons-list--custom">
+			Testing color changes in CSS:
+			<div>
+				<AppleIconTest height="24" />
+				<BellIconTest height="24" />
+				<GrinHeartsIconTest height="24" />
+				<UserCircleIconTest height="24" />
 			</div>
 		</div>
 		<div class="icons-list svg-hover-anchor">

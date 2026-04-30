@@ -12,6 +12,10 @@ import GitHubIconTest from '@iconify/ri-react-test/github-line';
 import TwitterIconTest from '@iconify/ri-react-test/twitter-x-line';
 import LinkedInIconTest from '@iconify/ri-react-test/linkedin-box-line';
 import BlueSkyIconTest from '@iconify/ri-react-test/bluesky-line';
+import AppleIconTest from '@iconify/glyphs-poly-react-test/apple';
+import BellIconTest from '@iconify/glyphs-poly-react-test/bell';
+import GrinHeartsIconTest from '@iconify/glyphs-poly-react-test/grin-hearts';
+import UserCircleIconTest from '@iconify/glyphs-poly-react-test/user-circle';
 import TestIcon1 from './icons/icon1.js';
 import TestIcon2 from './icons/icon2.js';
 import TestIcon3 from './icons/icon3.js';
@@ -311,6 +315,24 @@ function App() {
 						<TwitterIconTest height="24" />
 						<LinkedInIconTest height="24" />
 						<BlueSkyIconTest height="24" />
+					</div>
+				</div>
+				<div className="icons-list">
+					From glyphs test package:
+					<div>
+						<AppleIconTest height="24" />
+						<BellIconTest height="24" />
+						<GrinHeartsIconTest height="24" />
+						<UserCircleIconTest height="24" />
+					</div>
+				</div>
+				<div className="icons-list icons-list--custom">
+					Testing color changes in CSS:
+					<div>
+						<AppleIconTest height="24" />
+						<BellIconTest height="24" />
+						<GrinHeartsIconTest height="24" />
+						<UserCircleIconTest height="24" />
 					</div>
 				</div>
 			</section>

@@ -12,6 +12,10 @@ import GitHubIconTest from '@iconify/ri-vue-test/github-line';
 import TwitterIconTest from '@iconify/ri-vue-test/twitter-x-line';
 import LinkedInIconTest from '@iconify/ri-vue-test/linkedin-box-line';
 import BlueSkyIconTest from '@iconify/ri-vue-test/bluesky-line';
+import AppleIconTest from '@iconify/glyphs-poly-vue-test/apple';
+import BellIconTest from '@iconify/glyphs-poly-vue-test/bell';
+import GrinHeartsIconTest from '@iconify/glyphs-poly-vue-test/grin-hearts';
+import UserCircleIconTest from '@iconify/glyphs-poly-vue-test/user-circle';
 import TestIcon1 from './icons/icon1.vue';
 import TestIcon2 from './icons/icon2.vue';
 import TestIcon3 from './icons/icon3.vue';
@@ -241,6 +245,24 @@ function nextMode() {
 					<TwitterIconTest height="24" />
 					<LinkedInIconTest height="24" />
 					<BlueSkyIconTest height="24" />
+				</div>
+			</div>
+			<div class="icons-list">
+				From glyphs test package:
+				<div>
+					<AppleIconTest height="24" />
+					<BellIconTest height="24" />
+					<GrinHeartsIconTest height="24" />
+					<UserCircleIconTest height="24" />
+				</div>
+			</div>
+			<div class="icons-list icons-list--custom">
+				Testing color changes in CSS:
+				<div>
+					<AppleIconTest height="24" />
+					<BellIconTest height="24" />
+					<GrinHeartsIconTest height="24" />
+					<UserCircleIconTest height="24" />
 				</div>
 			</div>
 			<div class="icons-list svg-hover-anchor">
