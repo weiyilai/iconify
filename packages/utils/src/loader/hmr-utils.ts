@@ -21,11 +21,12 @@ export function isCustomHMRIconLoader(loader: CustomCollectionIconLoader): loade
 		)
 }
 
-export type FindModuleFn<T> = (collection: string, icon: string) => Awaitable<T[] | undefined>
+export type FindModulesFn<T> = (id: string) => T | undefined
+export type CollectIconModulesFn<T> = (collection: string, icon: string, findModules: FindModulesFn<T>) => T[] | undefined
 
 export interface HMRSupport<T> {
 	hmrCustomIconResolvers: CustomHMRIconLoader[]
-	resolveModuleIconName: (normalizedSVGPath: string) => Promise<T[] | undefined>
+	handleHotUpdate: (svgFilePath: string, findModules: FindModulesFn<T>) => T[] | undefined
 	resolveSVGIconPath: (collectionName: string, iconName: string) => string | undefined
 }
 
@@ -42,7 +43,7 @@ export function collectCustomHMRIconResolvers(
 }
 
 export function createHMRHelper<T>(
-	findModules: FindModuleFn<T>,
+	collectIconModules: CollectIconModulesFn<T>,
 	customCollections: Record<string, CustomCollectionIconLoader> = {},
 ): HMRSupport<T> {
 	const hmrCustomIconResolversMap = collectCustomHMRIconResolvers(customCollections)
@@ -50,12 +51,15 @@ export function createHMRHelper<T>(
 
 	return {
 		hmrCustomIconResolvers,
-		resolveModuleIconName: async (svgPath) => {
-			const normalizedSVGPath = normalizePath(svgPath)
+		handleHotUpdate: (
+			svgFilePath,
+			findModules,
+		): T[] | undefined => {
+			const normalizedSVGPath = normalizePath(svgFilePath)
 			for (const resolver of hmrCustomIconResolvers) {
 				const icon = resolver.resolveModuleIconName(normalizedSVGPath)
 				if (icon) {
-					const modules = await findModules(resolver.name, icon)
+					const modules = collectIconModules(resolver.name, icon, findModules)
 					if (modules && modules.length > 0) {
 						return modules
 					}
