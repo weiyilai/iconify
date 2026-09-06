@@ -6,7 +6,7 @@ import path from 'path';
 const fixturesDir = './tests/fixtures';
 const circlePath = normalizePath(path.resolve(fixturesDir, 'circle.svg'));
 const resolvedCircleName = '~icons/custom/circle';
-const ModuleNodeSim = 'module-name-for-circle';
+const ModuleNodeSim = 'module-node-for-circle';
 
 function createUnpluginIconTest() {
 	const customCollections: Record<string, CustomCollectionIconLoader> = {
@@ -15,6 +15,7 @@ function createUnpluginIconTest() {
 	/**
 	 * Simulate Vite handleHotUpdate at unplugin-icons:
 	 * - ctx.file: the file that changed, in this case the circle.svg
+	 * - invalidateHMR: alias for handleHotUpdate from createHMRHelper
 	 * - mGraph.getModuleById: will resolve the id associated with the virtual icon name, in this case ~icons/custom/circle
 	 * - unplugin-icons will resolve the static import from the consumer, and will return a new virtual with the SVG content or the component
 	 * - moduleDependency: it is the node module in the graph, it is just a string in the test to simulate ~icons/custom/circle being resolved
@@ -37,34 +38,35 @@ function createUnpluginIconTest() {
 		return moduleGraph.get(id);
 	}
 	// logic at invalidateHMR passing the filter as second argument to invalidateHMR
-	function collectVirtualIconModuleNames<T>(
+	function collectIconModules<T>(
 		collection: string,
-		icon: string
+		icon: string,
+		findModules: (id: string) => T | undefined,
 	): T[] | undefined {
 		return [
 			`~icons/${collection}/${icon}`,
 			`virtual:icons/${collection}/${icon}`,
 			`virtual/icons/${collection}/${icon}`,
-		].map(getModuleById).filter(Boolean) as T[]
+		].map(findModules).filter(Boolean) as T[]
 	}
 
-	const { hmrCustomIconResolvers, resolveModuleIconName } = createHMRHelper<string>(
-		collectVirtualIconModuleNames,
+	const { hmrCustomIconResolvers, handleHotUpdate: invalidateHMR } = createHMRHelper<string>(
+		collectIconModules,
 		customCollections,
 	);
-	return { loader: hmrCustomIconResolvers[0] as CustomHMRIconLoader, resolveModuleIconName };
+
+	return { getModuleById, invalidateHMR, loader: hmrCustomIconResolvers[0] as CustomHMRIconLoader };
 }
 
 describe('Testing FileSystemHMRIconLoader', () => {
 	test('FileSystemHMRIconLoader', async () => {
-		const { loader, resolveModuleIconName } = createUnpluginIconTest();
+		const { getModuleById, invalidateHMR, loader } = createUnpluginIconTest();
 		const resultPromise = loader.iconLoader('circle');
 		await expect(resultPromise).resolves.toBeDefined();
 		const result = await resultPromise;
 		expect(result && result.indexOf('svg') > -1).toBeTruthy();
-		const virtualIconNamePromise = resolveModuleIconName(circlePath)
-		await expect(virtualIconNamePromise).resolves.toBeDefined();
-		const virtualIconName = await virtualIconNamePromise;
+		const virtualIconName = invalidateHMR(circlePath, getModuleById)
+		expect(virtualIconName).toBeDefined();
 		expect(virtualIconName).toHaveLength(1);
 		expect(virtualIconName![0]).toBe(ModuleNodeSim);
 	});
