@@ -59,14 +59,13 @@ describe('Testing FileSystemHMRIconLoader', () => {
 	test('FileSystemHMRIconLoader', async () => {
 		const { loader, resolveModuleIconName } = createUnpluginIconTest();
 		const resultPromise = loader.iconLoader('circle');
-		await expect(resultPromise).resolves.not.toThrow();
+		await expect(resultPromise).resolves.toBeDefined();
 		const result = await resultPromise;
 		expect(result && result.indexOf('svg') > -1).toBeTruthy();
 		const virtualIconNamePromise = resolveModuleIconName(circlePath)
-		await expect(virtualIconNamePromise).resolves.not.toThrow();
+		await expect(virtualIconNamePromise).resolves.toBeDefined();
 		const virtualIconName = await virtualIconNamePromise;
-		expect(virtualIconName).toBeDefined();
-		expect(virtualIconName!).toHaveLength(1);
+		expect(virtualIconName).toHaveLength(1);
 		expect(virtualIconName![0]).toBe(ModuleNodeSim);
 	});
 });
